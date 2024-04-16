@@ -1,0 +1,40 @@
+body
+{
+ background-color:#ecebeb !important;
+}
+.red-color
+{
+  color:#b20036 !important;
+  font-size:20px !important;
+}
+.bg-color
+{
+  background-color: #b20036 !important;
+}                         
+.sidebar:hover{
+  background-color: #b20036 !important;
+}
+a:link
+{
+  text-decoration-line: none !important;
+}
+.flex
+{
+  display: flex;
+  }
+  .input-color
+  {
+    background-color: #e8f0fe;
+  }
+  .vinobridge
+  {
+    font-size:30px !important;
+  }
+  .size
+  {
+    width:380px !important;
+  }
+.tab-content
+{
+text-align: center;
+}
