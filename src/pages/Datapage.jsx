@@ -72,7 +72,6 @@ const Datapage = () => {
                     <p>{initialVal?.emailId}</p>
 
                     <b>Usertype</b>
-<hi></hi>
                     <p>{initialVal?.userType}</p>
 
                     <b>Companyname</b>
