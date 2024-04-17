@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-export const PrivateRoute = () => {
-    const val=localStorage.getItem("userType")
+export const PrivateRoute = ({val}) => {
+    
   return val ? <Outlet /> : <Navigate to="/" />;
 };

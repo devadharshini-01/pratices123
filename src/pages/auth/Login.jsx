@@ -20,15 +20,11 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleFormSubmit = (values) => {
-    console.log(values);
-
     if (
       loginCredential.includes(values.username) &&
       values.password === "Vinifera@1234"
     ) {
       localStorage.setItem("userType", values.username);
-
-
       navigate("/Dashboard");
     } else {
       toast.error("Incorrect username or password");

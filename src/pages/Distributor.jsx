@@ -14,12 +14,13 @@ import ReactPaginate from "react-paginate";
 import moment from "moment";
 import Input from "../component/custom/Input";
 import { DistributorHeaderName, RetailerHeaderName } from "../Constant";
-import { Datapage } from "./Datapage";
+
 
 const Distributor = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const selector = useSelector((state) => state.userlist.userlistapi);
+  const state = localStorage.getItem("userType")
   const [paginate, setPaginate] = useState();
   const [userDetail, setuserDetail] = useState({
     userType: "RETAILER",
@@ -59,9 +60,16 @@ const Distributor = () => {
   };
   const handleClick = (DD) => {
     localStorage.setItem("ReturnPath", window.location.pathname);
-    const data = localStorage.getItem("userType")
-    navigate("/userdetail", { state: { DD } });
-  };
+ 
+ 
+    if(state==="Admin"){
+      navigate("/userdetail",{state:{DD}});
+    }else{
+      navigate("/Datapage",{state:{DD}})
+    }
+
+    }
+  
 
   return (
     <>

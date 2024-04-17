@@ -2,15 +2,11 @@ import Sidebar from "../component/custom/Sidebar";
 import Header from "../component/custom/Header";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-
 import Button from "../component/custom/Button";
-import Input from "../component/custom/Input";
 import { InlineIcon } from "@iconify/react";
-import { Tabs } from "react-bootstrap";
 import { Detailpage } from "./Detailpage";
 import { Order } from "./Order";
 import { Platformpage } from "./Platformpage";
-import { RetailerData } from "../Constant";
 import { Retailerspage } from "./Retailerspage";
 import { Settings } from "./Settings";
 
@@ -22,8 +18,10 @@ const Userdetail = () => {
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
   const [openTab, setOpenTab] = useState("Platform Fees");
-  const returnPathWithoutSlash = returnPath ? returnPath.replace(/\//g, "") : "";
-console.log(openTab,"tab");
+  const returnPathWithoutSlash = returnPath
+    ? returnPath.replace(/\//g, "")
+    : "";
+  console.log(openTab, "tab");
   const tabs = [
     {
       name: "Details",
@@ -31,12 +29,10 @@ console.log(openTab,"tab");
         <Detailpage initialVal={initialVal} edit={edit} setEdit={setEdit} />
       ),
     },
-    { name: "Orders", content: <Order/> },
+    { name: "Orders", content: <Order /> },
     {
       name: "Platform Fees",
-      content: (
-        <Platformpage/>
-      ),
+      content: <Platformpage />,
     },
     { name: "Retailers", content: <Retailerspage /> },
     { name: "Settings", content: <Settings /> },
@@ -65,15 +61,21 @@ console.log(openTab,"tab");
                     </div>
 
                     <div className="col-3">
-                      {openTab=== "Details" &&<Button
-                        type="button"
-                        onClick={() => setEdit(!edit)}
-                        color="white"
-                        buttonName={edit ? "cancel" : "edit"}
-                        Icon={
-                          <InlineIcon icon="mage:edit" width="15" height="15" />
-                        }
-                      />}
+                      {openTab === "Details" && (
+                        <Button
+                          type="button"
+                          onClick={() => setEdit(!edit)}
+                          color="white"
+                          buttonName={edit ? "cancel" : "edit"}
+                          Icon={
+                            <InlineIcon
+                              icon="mage:edit"
+                              width="15"
+                              height="15"
+                            />
+                          }
+                        />
+                      )}
                     </div>
                   </div>
                   <div className="card mt-2 border-0 ">
@@ -82,19 +84,16 @@ console.log(openTab,"tab");
                       id="pills-tab"
                       role="tablist"
                     >
-                
-                        {tabs.map((item) => (
-                                <li className="nav-item" role="presentation" >
+                      {tabs.map((item) => (
+                        <li className="nav-item" role="presentation">
                           <Link
                             to={item.link}
                             onClick={() => setOpenTab(item.name)}
-                           
                           >
                             <b className="red-color">{item.name}</b>
                           </Link>
-                          </li>
-                        ))}
-                 
+                        </li>
+                      ))}
                     </ul>
                   </div>
                   {tabs.map((val) => (
@@ -104,7 +103,7 @@ console.log(openTab,"tab");
                       }`}
                     >
                       <div id="pills-tabContent">
-                        <div  key={val.name}>{val.content}</div>
+                        <div key={val.name}>{val.content}</div>
                       </div>
                     </div>
                   ))}

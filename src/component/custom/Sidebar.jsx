@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
-  sidebarData,
   DistributorData,
   RetailerData,
   AdminData,

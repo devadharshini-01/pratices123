@@ -1,208 +1,149 @@
-import { useLocation } from "react-router-dom";
-import Sidebar from "../component/custom/Sidebar";
+import React from 'react'
+import { useLocation } from 'react-router-dom';
+import Sidebar from '../component/custom/Sidebar';
+import Header from '../component/custom/Header';
 
-export const Datapage = () => {
-    const location = useLocation();
-    const initialVal = location?.state?.DD;
-    console.log(initialVal,"oooooo");
-
+const Datapage = () => {
+  const location = useLocation();
+  const initialVal = location?.state?.DD;
+  const returnPath = localStorage.getItem("ReturnPath");
+  const distributorPath = returnPath ? returnPath.replace(/\//g, "") : "";
   return (
     <>
-   <div className="row">
-    <div className="col-2 bg-white vh-100 rounded-end-5">
-        <Sidebar/>
-    </div>
-    <div className="col-10">
+      <div className="overflow-hidden">
+        <div className="vh-100">
+          <div className="row">
+            <div className="col-2 bg-white vh-100 rounded-end-5">
+              <Sidebar />
+            </div>
+            <div className="col-10">
   
-      
-   
-  <div className="card border-0 p-3 mt-5">
-              <div className="row">
-                <div className="col-4">
-                  <b>UserID</b>
-                  
-                 
-                 
+              <Header title={distributorPath} />
+              <div className="card border-0 p-3 mt-5">
+                <div className="row">
+                  <div className="col-4">
+                    <b>UserID</b>
+
                     <p>{initialVal?.userId}</p>
-             
-                  <b>Status</b>
 
-                
-                 
-         
+                    <b>Status</b>
+
                     <p>{initialVal?.status}</p>
-            
-              
-                  <b>ProfileId</b>
 
-                
-                 
-              
+                    <b>ProfileId</b>
+
                     <p>{initialVal?.profileId}</p>
-                 
-               
-                  <b>Website</b>
 
-              
-            
+                    <b>Website</b>
+
                     <p>{initialVal?.website}</p>
-          
-                  <b>ActivationKey</b>
 
-        
-          
+                    <b>ActivationKey</b>
+
                     <p>{initialVal?.activationKey}</p>
-     
-                  <b>LicenceManagementSystem</b>
 
-                 
-          
+                    <b>LicenceManagementSystem</b>
+
                     <p>{initialVal?.licenceNumber}</p>
-          
-                  <b>InventoryManagementSystem</b>
+
+                    <b>InventoryManagementSystem</b>
 
                     <p>{initialVal?.inventoryManagementSystem}</p>
-               
-                  <b>Monthlyorders</b>
 
-          
-                   
-               
+                    <b>Monthlyorders</b>
+
                     <p>{initialVal?.monthlyOrders}</p>
 
-                  <b>Nooforders</b>
+                    <b>Nooforders</b>
 
                     <p>{initialVal?.noOfOrders}</p>
-            
-                
-                  <b>Ordercutofftime</b>
 
-                
+                    <b>Ordercutofftime</b>
+
                     <p>{initialVal?.orderCutOffTime}</p>
-              
-            
-                  <b>MonthlySalessort</b>
 
-               
-            
+                    <b>MonthlySalessort</b>
+
                     <p>{initialVal?.monthlySalesSort}</p>
-              
-                </div>
-                <div className="col-4">
-                  <b>EmailId</b>
+                  </div>
+                  <div className="col-4">
+                    <b>EmailId</b>
 
-               
                     <p>{initialVal?.emailId}</p>
-      
-    
-                  <b>Usertype</b>
 
-                 
+                    <b>Usertype</b>
+
                     <p>{initialVal?.userType}</p>
-              
-             
-                  <b>Companyname</b>
 
-                
+                    <b>Companyname</b>
+
                     <p>{initialVal?.companyName}</p>
-        
-                  <b>Primarycontactname</b>
 
-                
+                    <b>Primarycontactname</b>
+
                     <p>{initialVal?.primaryContactName}</p>
-                
-            
-                  <b>Posprvider</b>
 
-             
+                    <b>Posprvider</b>
+
                     <p>{initialVal?.posProvider}</p>
-           
-           
-                  <b>Licencetype</b>
 
-           
-                 
-                
+                    <b>Licencetype</b>
+
                     <p>{initialVal?.licenceType}</p>
-                
-                  <b>AdditionalOrderFulfillmentSoftware</b>
 
-               
+                    <b>AdditionalOrderFulfillmentSoftware</b>
+
                     <p>{initialVal?.additionalOrderFulfillmentSoftware}</p>
-               
-                  <b>MinimumOrderThresholds</b>
 
-                  
+                    <b>MinimumOrderThresholds</b>
+
                     <p>{initialVal?.minimumOrderThresholds}</p>
-             
-                
-                  <b>NumberOfStoreLocations</b>
 
-                 
+                    <b>NumberOfStoreLocations</b>
+
                     <p>{initialVal?.numberOfStoreLocations}</p>
-             
-                 
-                </div>
-                <div className="col-4">
-                  <b>DisplayId</b>
+                  </div>
+                  <div className="col-4">
+                    <b>DisplayId</b>
 
-                 
                     <p>{initialVal?.displayId}</p>
-          
-               
-                  <b>Joineddate</b>
 
-            
+                    <b>Joineddate</b>
+
                     <p>{initialVal?.joinedDate}</p>
-             
-              
-                  <b>Phonenumber</b>
 
-              
-                 
-              
+                    <b>Phonenumber</b>
+
                     <p>{initialVal?.phoneNumber}</p>
-                
-               
-                  <b>Address</b>
+
+                    <b>Address</b>
 
                     <p>{initialVal?.address}</p>
-              
- 
-                  <b>websiteProvider</b>
 
-              
+                    <b>websiteProvider</b>
+
                     <p>{initialVal?.websiteProvider}</p>
 
-                  <b>IpAddress</b>
+                    <b>IpAddress</b>
 
-                
-           
                     <p>{initialVal?.ipAddress}</p>
-              
-                  <b>NoOfMappedRetailers</b>
 
-             
-               
-                 
+                    <b>NoOfMappedRetailers</b>
+
                     <p>{initialVal?.noOfMappedRetailers}</p>
-           
-                  <b>Monthlysales</b>
 
-                 
-              
-                
-            
-             
+                    <b>Monthlysales</b>
+                  </div>
                 </div>
               </div>
-
-          
             </div>
-  </div>
-  
-    </div>
- 
+          </div>
+        </div>
+      </div>
     </>
   );
-};
+}
+
+export default Datapage
+
+
