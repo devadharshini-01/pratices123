@@ -7,7 +7,7 @@ import Header from "../component/custom/Header";
 import Sidebar from "../component/custom/Sidebar";
 import Table from "../component/custom/Table";
 import { UsersListApiAction } from "../Redux/Action/UsersListApiAction";
-import "../App.css";
+import "../App.css";                                                                                                                     
 import Button from "../component/custom/Button";
 import { InlineIcon } from "@iconify/react";
 import ReactPaginate from "react-paginate";
@@ -15,12 +15,11 @@ import moment from "moment";
 import Input from "../component/custom/Input";
 import { DistributorHeaderName, RetailerHeaderName } from "../Constant";
 
-
 const Distributor = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const selector = useSelector((state) => state.userlist.userlistapi);
-  const state = localStorage.getItem("userType")
+  const state = localStorage.getItem("userType");
   const [paginate, setPaginate] = useState();
   const [userDetail, setuserDetail] = useState({
     userType: "RETAILER",
@@ -60,31 +59,28 @@ const Distributor = () => {
   };
   const handleClick = (DD) => {
     localStorage.setItem("ReturnPath", window.location.pathname);
- 
- 
-    if(state==="Admin"){
-      navigate("/userdetail",{state:{DD}});
-    }else{
-      navigate("/Datapage",{state:{DD}})
-    }
 
+    if (state === "Admin") {
+      navigate("/userdetail", { state: { DD } });
+    } else {
+      navigate("/Datapage", { state: { DD } });
     }
-  
+  }; 
+
+
 
   return (
     <>
       <div className="overflow-hidden">
         <div className="vh-100">
           <div className="row ">
-            <div className="col-2 bg-white  rounded-end-5 ">
-              <Sidebar  />
+            <div className=" d-none d-sm-none d-md-block d-lg-block col-2 bg-white  rounded-end-5 ">
+              <Sidebar />
             </div>
 
-            <div className="col-10 ">
+            <div className="col-sm-12 col-md-10 col-lg-10 ">
               <div className="d-flex vh-100 flex-column overflow-auto">
-                <Header title={userDetail?.userType}
-                  
-                />
+                <Header title={userDetail?.userType} />
                 <div className="flex-grow-1 overflow-x-hidden pb-80px">
                   <div className="row">
                     <div className="col-9 ">
@@ -100,14 +96,14 @@ const Distributor = () => {
                             });
                           } else {
                             const { searchTerm, ...value } = userDetail;
-                      
+
                             setuserDetail(value);
-                            
+
                             setuserDetail({ ...userDetail, page: paginate });
                           }
                         }}
                       />
-                      {console.log(userDetail,"user")}
+                      {console.log(userDetail, "user")}
                     </div>
 
                     <div className=" col-3 d-flex gap-2 ">
@@ -136,7 +132,7 @@ const Distributor = () => {
                     </div>
                   </div>
 
-                  <div className="table-container ">
+                  <div className="table-container table-responsive">
                     <Table
                       headersName={
                         userDetail.userType === "RETAILER"

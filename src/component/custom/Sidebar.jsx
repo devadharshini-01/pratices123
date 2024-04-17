@@ -21,7 +21,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="list-group ">
+      <div className="list-group  ">
         <b className="red-color p-4">Vinobridge</b>
         {Array.isArray(currentSidebarData) &&
           currentSidebarData?.map((value) => {

@@ -77,7 +77,7 @@ export const AdminData = [
   { name: "Distributor", path: "/Distributor" },
   { name: "Exchange", path: "/Exchange" },
   { name: "Retailer", path: "/Retailer" },
-  { name: "Reports", path: "/Retailer" },
+  { name: "Reports", path: "/Reports" },
 
 ]
 

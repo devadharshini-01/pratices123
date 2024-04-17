@@ -13,7 +13,7 @@ const initialValues = {
 };
 const validationSchema = yup.object().shape({
   username: yup.string().required("username is required"),
-  password: yup.string().required("password  required"),
+  password: yup.string().min(10,"10 letters above").required("password  required"),
 });
 const loginCredential = ["Admin", "Distributor", "Retailer"];
 const Login = () => {
@@ -47,7 +47,7 @@ const Login = () => {
 
           <h4 className="text-center">Sign with your email address</h4>
           <div>
-            <label for="exampleFormControlInput1" class="form-label">
+            <label for="exampleFormControlInput1" className="form-label">
               User name
             </label>
             <input
@@ -65,7 +65,7 @@ const Login = () => {
             </label>
             <input
               type="email"
-              class="form-control input-color"
+              className="form-control input-color"
               id="password1"
               placeholder="Password"
               name="password"
@@ -75,14 +75,14 @@ const Login = () => {
             <p className="text-danger">{formik.errors.password}</p>
             <div className="row">
               <div className="col-7">
-                <div class="form-check">
+                <div className="form-check">
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="checkbox"
                     value=""
                     id="flexCheckDefault"
                   />
-                  <label class="form-check-label" for="flexCheckDefault">
+                  <label className="form-check-label" for="flexCheckDefault">
                     Keep me signed in
                   </label>
                 </div>

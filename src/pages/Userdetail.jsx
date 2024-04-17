@@ -43,10 +43,10 @@ const Userdetail = () => {
       <div className="overflow-hidden">
         <div className="vh-100">
           <div className="row">
-            <div className="col-2 bg-white rounded-end-5 sidebor">
+            <div className="d-none d-sm-none d-md-block d-lg-block col-2 bg-white rounded-end-5 sidebor d-sm-none d-md-block">
               <Sidebar />
             </div>
-            <div className="col-10">
+            <div className=" col-sm-12 col-md-10 col-lg-10">
               <div className="d-flex vh-100 flex-column overflow-auto">
                 <Header title={returnPathWithoutSlash} />
                 <div className="flex-grow-1 overflow-x-hidden pb-80px">
