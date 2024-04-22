@@ -1,36 +1,27 @@
-import React, { useEffect } from 'react'
-import { useLocation, useParams } from 'react-router-dom';
-import Sidebar from '../component/custom/Sidebar';
-import Header from '../component/custom/Header';
-import { useDispatch, useSelector } from 'react-redux';
-import { UserGetApi } from '../Redux/Action/UsersListApiAction';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { UserGetApi } from "../Redux/Action/UsersListApiAction";
 
 const Datapage = () => {
-  const {userId}=useParams()
-  const dispatch=useDispatch()
-  const listdata=useSelector((state)=>state.userlist.userdataapi)
-  console.log(listdata,"lll");
+  const { userId } = useParams();
+  const dispatch = useDispatch();
+  const listdata = useSelector((state) => state.userlist.userdataapi);
   const initialVal = listdata?.data?.data;
   const returnPath = localStorage.getItem("ReturnPath");
-useEffect(()=>{
-dispatch(UserGetApi(userId))
-},[])
+  useEffect(() => {
+    dispatch(UserGetApi(userId));
+  }, []);
 
   return (
     <>
       <div className="overflow-auto">
         <div className="vh-100">
           <div className="row">
-        
-
             <div className=" col-sm-12 col-md-10 col-lg-10 ">
-  
-     
               <div className="card border-0 p-3 mt-5">
                 <div className="row">
-       
-
-                    {/* <b>UserID</b>
+                  {/* <b>UserID</b>
 
                     <p>{listdata?.userId}</p>
 
@@ -73,17 +64,20 @@ dispatch(UserGetApi(userId))
                     <b>MonthlySalessort</b>
 
                     <p>{initialVal?.monthlySalesSort}</p> */}
-                    {initialVal&&Object.keys(initialVal).map((item)=>{
-                      console.log(item,"itemn");
-                      return(
-                        <div className='col-4'>
-                        <p>{item}:<br></br>{initialVal[item]}</p>
+                  {initialVal &&
+                    Object.keys(initialVal).map((item) => {
+                      console.log(item, "itemn");
+                      return (
+                        <div className="col-4">
+                          <p>
+                            {item}:<br></br>
+                            {initialVal[item]}
+                          </p>
                         </div>
-                      )
-                     
+                      );
                     })}
-                  </div>
-                  {/* <div className="col-4">
+                </div>
+                {/* <div className="col-4">
                     <b>EmailId</b>
 
                     <p>{initialVal?.emailId}</p>
@@ -150,17 +144,13 @@ dispatch(UserGetApi(userId))
 
                     <b>Monthlysales</b>
                   </div> */}
-                </div>
-           
-                
               </div>
             </div>
           </div>
         </div>
+      </div>
     </>
   );
-}
+};
 
-export default Datapage
-
-
+export default Datapage;
