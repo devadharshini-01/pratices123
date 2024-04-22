@@ -1,8 +1,11 @@
 import axios from "axios";
-import { userlistdata } from "../Constants/UserListApiConstant";
+import { userdata, userlistdata } from "../Constants/UserListApiConstant";
+import { useParams } from "react-router-dom";
+import { token } from "../../Constant";
 
 const getapi = process.env.REACT_APP_BASEURL;
-const token = process.env.REACT_APP_TOKEN;
+
+
 export const UsersListApiAction = (payload) => async (dispatch) => {
   console.log(getapi,"get");
 
@@ -29,3 +32,25 @@ export const UsersListApiAction = (payload) => async (dispatch) => {
     payload: {},
   });
 };
+
+export const UserGetApi = (userId) =>async(dispatch)=>{
+  await dispatch ({
+    type:userdata.REQUEST,
+    payload:{loading:true},
+})
+try{
+ const {data} = await axios.get(`${getapi}/getUserById?id=${userId}`,{
+  headers:{Authorization:`Bearer ${token}`}
+})
+await dispatch({
+  type:userdata.SUCCESS,
+  payload:{loading:false,data:data},
+})
+}
+catch (error){
+await dispatch({
+  type:userdata.ERROR,
+  payload:{loading:false,data:{}},
+})
+}
+}

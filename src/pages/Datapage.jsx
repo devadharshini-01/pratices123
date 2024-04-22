@@ -1,37 +1,46 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { useLocation, useParams } from 'react-router-dom';
 import Sidebar from '../component/custom/Sidebar';
 import Header from '../component/custom/Header';
+import { useDispatch, useSelector } from 'react-redux';
+import { UserGetApi } from '../Redux/Action/UsersListApiAction';
 
 const Datapage = () => {
-  const location = useLocation();
-  const initialVal = location?.state?.DD;
+  const {userId}=useParams()
+  const dispatch=useDispatch()
+  const listdata=useSelector((state)=>state.userlist.userdataapi)
+  console.log(listdata,"lll");
+  const initialVal = listdata?.data?.data;
   const returnPath = localStorage.getItem("ReturnPath");
-  const distributorPath = returnPath ? returnPath.replace(/\//g, "") : "";
+useEffect(()=>{
+dispatch(UserGetApi(userId))
+},[])
+
   return (
     <>
-      <div className="overflow-hidden">
+      <div className="overflow-auto">
         <div className="vh-100">
           <div className="row">
         
 
             <div className=" col-sm-12 col-md-10 col-lg-10 ">
   
-              <Header title={distributorPath} />
+     
               <div className="card border-0 p-3 mt-5">
                 <div className="row">
-                  <div className="col-4">
-                    <b>UserID</b>
+       
 
-                    <p>{initialVal?.userId}</p>
+                    {/* <b>UserID</b>
+
+                    <p>{listdata?.userId}</p>
 
                     <b>Status</b>
 
-                    <p>{initialVal?.status}</p>
+                    <p>{listdata?.status}</p>
 
                     <b>ProfileId</b>
 
-                    <p>{initialVal?.profileId}</p>
+                    <p>{initialV?.profileId}</p> find how to map object
 
                     <b>Website</b>
 
@@ -63,9 +72,18 @@ const Datapage = () => {
 
                     <b>MonthlySalessort</b>
 
-                    <p>{initialVal?.monthlySalesSort}</p>
+                    <p>{initialVal?.monthlySalesSort}</p> */}
+                    {initialVal&&Object.keys(initialVal).map((item)=>{
+                      console.log(item,"itemn");
+                      return(
+                        <div className='col-4'>
+                        <p>{item}:<br></br>{initialVal[item]}</p>
+                        </div>
+                      )
+                     
+                    })}
                   </div>
-                  <div className="col-4">
+                  {/* <div className="col-4">
                     <b>EmailId</b>
 
                     <p>{initialVal?.emailId}</p>
@@ -131,13 +149,14 @@ const Datapage = () => {
                     <p>{initialVal?.noOfMappedRetailers}</p>
 
                     <b>Monthlysales</b>
-                  </div>
+                  </div> */}
                 </div>
+           
+                
               </div>
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 }

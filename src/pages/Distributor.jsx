@@ -62,9 +62,9 @@ const Distributor = () => {
     localStorage.setItem("ReturnPath", window.location.pathname);
 
     if (state === "Admin") {
-      navigate("/userdetail", { state: { DD } });
+      navigate( `userdetail /${DD.userId}`);
     } else {
-      navigate("/Datapage", { state: { DD } });
+      navigate(`/Datapage/${DD.userId}`);
     }
   }; 
 
@@ -77,7 +77,7 @@ const Distributor = () => {
 
             <div className="col-sm-12 col-md-10 col-lg-10 ">
               <div className="d-flex vh-100 flex-column overflow-auto">
-                {/* <Header title={userDetail?.userType} /> */}
+            
                 <div className="flex-grow-1 overflow-x-hidden pb-80px">
                   <div className="row">
                     <div className="col-9 ">

@@ -39,7 +39,7 @@ export const App = () => {
             <Route path="/ddOrder" element={<WorkinProgress />} />
             <Route path="/ssfee" element={<WorkinProgress />} />
             <Route path="/reports" element={<WorkinProgress />} />
-            <Route path="/Datapage" element={<Datapage />} />
+            <Route path="/Datapage/:userId" element={<Datapage />} />
           </Route>
         </Routes>
       </BrowserRouter>

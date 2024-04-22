@@ -1,7 +1,7 @@
 import Sidebar from "../component/custom/Sidebar";
 import Header from "../component/custom/Header";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Button from "../component/custom/Button";
 import { InlineIcon } from "@iconify/react";
 import { Detailpage } from "./Detailpage";
@@ -10,8 +10,10 @@ import { Platformpage } from "./Platformpage";
 import { Retailerspage } from "./Retailerspage";
 import { Settings } from "./Settings";
 import Layout from "../component/custom/Layout";
+import { useSelector } from "react-redux";
 
 const Userdetail = () => {
+
   const location = useLocation();
   const initialVal = location?.state?.DD;
   const returnPath = localStorage.getItem("ReturnPath");
@@ -19,9 +21,9 @@ const Userdetail = () => {
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
   const [openTab, setOpenTab] = useState("Detailpage");
-  const returnPathWithoutSlash = returnPath
-    ? returnPath.replace(/\//g, "")
-    : "";
+  // const returnPathWithoutSlash = returnPath
+  //   ? returnPath.replace(/\//g, "")
+  //   : "";
   console.log(openTab, "tab");
   const tabs = [
     {
@@ -39,6 +41,9 @@ const Userdetail = () => {
     { name: "Settings", content: <Settings /> },
   ];
 
+  useEffect(()=>{
+
+  },[])
   return (
     <>
       <div className="overflow-hidden">
