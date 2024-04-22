@@ -24,7 +24,7 @@ if(storeactive){
   setActiveSidebar(storeactive)
 }
 
-  }, []);
+  }, [userType]);
 
   const handleSidebar=(path)=>{
     setActiveSidebar(path)
