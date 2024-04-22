@@ -13,9 +13,7 @@ const Datapage = () => {
       <div className="overflow-hidden">
         <div className="vh-100">
           <div className="row">
-            <div className="d-none d-sm-none d-md-block d-lg-block col-2 bg-white vh-100 rounded-end-5">
-              <Sidebar />
-            </div>
+        
 
             <div className=" col-sm-12 col-md-10 col-lg-10 ">
   

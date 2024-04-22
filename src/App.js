@@ -6,39 +6,41 @@ import Userdetail from "./pages/Userdetail";
 import Distributor from "./pages/Distributor";
 import { PrivateRoute } from "./pages/PrivateRoute";
 import WorkinProgress from "./pages/WorkinProgress";
-import  Datapage  from "./pages/Datapage";
+import Datapage from "./pages/Datapage";
 
 export const App = () => {
-  const val=localStorage.getItem("userType")
-const location= window.location.pathname
-useEffect(()=>{
-  if(location==="/")
-localStorage.removeItem("userType")
-},[location])
+  const val = localStorage.getItem("userType");
+  const location = window.location.pathname;
+  useEffect(() => {
+    if (location === "/") localStorage.removeItem("userType");
+  }, [location]);
+  console.log(location,"window.location.pathname");
   return (
-
     <>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={<Login />}
-            
-          />
-          <Route element={<PrivateRoute val={val}/>}>
-          <Route path="/Distributor" element={<Distributor/>} />
-          <Route path="/Retailer" element={<Distributor />} />
-          <Route path="/userdetail" element={<Userdetail   />}/>
-          <Route path="/Dashboard" element={<WorkinProgress />} />
-          <Route path="/Exchange" element={<WorkinProgress/>} />
-          <Route path="/Exchange" element={<WorkinProgress/>} />
-          <Route path="/ddOrder" element={<WorkinProgress />} />
-          <Route path="/ssfee" element={<WorkinProgress />} />
-          <Route path="/Distributor/reports" element={<WorkinProgress />} />
-          <Route path="/Datapage" element={<Datapage />} />
+          <Route path="/" element={<Login />} />
 
+          <Route element={ <PrivateRoute val={val} />}>
+
+            <Route
+              path="/Distributor"
+              element={
+               
+                  <Distributor />
+                
+              }
+            />
+            <Route path="/Retailer" element={<Distributor />} />
+            <Route path="/userdetail" element={<Userdetail />} />
+            <Route path="/Dashboard" element={<WorkinProgress />} />
+            <Route path="/Exchange" element={<WorkinProgress />} />
+            <Route path="/Exchange" element={<WorkinProgress />} />
+            <Route path="/ddOrder" element={<WorkinProgress />} />
+            <Route path="/ssfee" element={<WorkinProgress />} />
+            <Route path="/reports" element={<WorkinProgress />} />
+            <Route path="/Datapage" element={<Datapage />} />
           </Route>
-        
         </Routes>
       </BrowserRouter>
     </>

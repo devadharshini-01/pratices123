@@ -9,6 +9,7 @@ import { Order } from "./Order";
 import { Platformpage } from "./Platformpage";
 import { Retailerspage } from "./Retailerspage";
 import { Settings } from "./Settings";
+import Layout from "../component/custom/Layout";
 
 const Userdetail = () => {
   const location = useLocation();
@@ -17,7 +18,7 @@ const Userdetail = () => {
 
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
-  const [openTab, setOpenTab] = useState("Platform Fees");
+  const [openTab, setOpenTab] = useState("Detailpage");
   const returnPathWithoutSlash = returnPath
     ? returnPath.replace(/\//g, "")
     : "";
@@ -43,12 +44,10 @@ const Userdetail = () => {
       <div className="overflow-hidden">
         <div className="vh-100">
           <div className="row">
-            <div className="d-none d-sm-none d-md-block d-lg-block col-2 bg-white rounded-end-5 sidebor d-sm-none d-md-block">
-              <Sidebar />
-            </div>
+         
             <div className=" col-sm-12 col-md-10 col-lg-10">
               <div className="d-flex vh-100 flex-column overflow-auto">
-                <Header title={returnPathWithoutSlash} />
+                {/* <Header title={returnPathWithoutSlash} /> */}
                 <div className="flex-grow-1 overflow-x-hidden pb-80px">
                   <div className="row">
                     <div className="col-9">

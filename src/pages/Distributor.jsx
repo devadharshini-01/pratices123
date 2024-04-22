@@ -14,6 +14,7 @@ import ReactPaginate from "react-paginate";
 import moment from "moment";
 import Input from "../component/custom/Input";
 import { DistributorHeaderName, RetailerHeaderName } from "../Constant";
+import Layout from "../component/custom/Layout";
 
 const Distributor = () => {
   const dispatch = useDispatch();
@@ -71,16 +72,12 @@ const Distributor = () => {
 
   return (
     <>
-      <div className="overflow-hidden">
-        <div className="vh-100">
-          <div className="row ">
-            <div className=" d-none d-sm-none d-md-block d-lg-block col-2 bg-white  rounded-end-5 ">
-              <Sidebar />
-            </div>
+
+   
 
             <div className="col-sm-12 col-md-10 col-lg-10 ">
               <div className="d-flex vh-100 flex-column overflow-auto">
-                <Header title={userDetail?.userType} />
+                {/* <Header title={userDetail?.userType} /> */}
                 <div className="flex-grow-1 overflow-x-hidden pb-80px">
                   <div className="row">
                     <div className="col-9 ">
@@ -103,7 +100,7 @@ const Distributor = () => {
                           }
                         }}
                       />
-                      {console.log(userDetail, "user")}
+          
                     </div>
 
                     <div className=" col-3 d-flex gap-2 ">
@@ -211,11 +208,8 @@ const Distributor = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
       <ToastContainer />
+    
     </>
   );
 };

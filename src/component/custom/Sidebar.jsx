@@ -8,6 +8,7 @@ import {
 
 const Sidebar = () => {
   const [currentSidebarData, setCurrentSidebarData] = useState([]);
+  const [activeSidebar, setActiveSidebar] = useState("/Dashboard");
   const userType = localStorage.getItem("userType");
   useEffect(() => {
     if (userType === "Distributor") {
@@ -17,7 +18,18 @@ const Sidebar = () => {
     }else if(userType==="Admin"){
       setCurrentSidebarData(AdminData)
     }
-  }, [window.location.pathname]);
+
+const storeactive=localStorage.getItem("activeSidebar")
+if(storeactive){
+  setActiveSidebar(storeactive)
+}
+
+  }, []);
+
+  const handleSidebar=(path)=>{
+    setActiveSidebar(path)
+    localStorage.setItem("activeSidebar",path)
+  }
 
   return (
     <>
@@ -30,10 +42,11 @@ const Sidebar = () => {
                 {" "}
                 <p
                   className={`${
-                    window.location.pathname === value.path
+                    activeSidebar === value.path
                       ? " p-2 rounded-3 bg-color  text-white"
                       : "text-black"
                   } p-2 hover list-group  fontsize `}
+                  onClick={()=>handleSidebar(value.path)}
                 >
                   {value.name}
                 </p>
