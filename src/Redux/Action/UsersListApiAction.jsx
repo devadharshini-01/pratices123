@@ -1,6 +1,6 @@
 import axios from "axios";
 import { userdata, userlistdata } from "../Constants/UserListApiConstant";
-import { useParams } from "react-router-dom";
+
 import { token } from "../../Constant";
 
 const getapi = process.env.REACT_APP_BASEURL;

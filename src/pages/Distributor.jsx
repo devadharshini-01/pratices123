@@ -7,7 +7,7 @@ import Header from "../component/custom/Header";
 import Sidebar from "../component/custom/Sidebar";
 import Table from "../component/custom/Table";
 import { UsersListApiAction } from "../Redux/Action/UsersListApiAction";
-import "../App.css";                                                                                                                     
+import "../App.css";
 import Button from "../component/custom/Button";
 import { InlineIcon } from "@iconify/react";
 import ReactPaginate from "react-paginate";
@@ -62,154 +62,145 @@ const Distributor = () => {
     localStorage.setItem("ReturnPath", window.location.pathname);
 
     if (state === "Admin") {
-      navigate( `userdetail /${DD.userId}`);
+      navigate(`/userdetail/${DD.userId}`);
+    
     } else {
       navigate(`/Datapage/${DD.userId}`);
     }
-  }; 
-
-
+  };
 
   return (
     <>
+    
+        <div className="d-flex vh-100 flex-column overflow-auto">
+          <div className="flex-grow-1 overflow-x-hidden pb-80px">
+            <div className="row d-flex justify-content-between">
+              <div className="col-sm-12 col-md-3 col-lg-3 ">
+                <Input
+                  placeholder="search"
+             
+                  onChange={(event) => {
+                    if (event.target.value !== "") {
+                      setuserDetail({
+                        ...userDetail,
+                        searchTerm: event.target.value,
+                        page: 1,
+                      });
+                    } else {
+                      const { searchTerm, ...value } = userDetail;
 
-   
+                      setuserDetail(value);
 
-            <div className="col-sm-12 col-md-10 col-lg-10 ">
-              <div className="d-flex vh-100 flex-column overflow-auto">
-            
-                <div className="flex-grow-1 overflow-x-hidden pb-80px">
-                  <div className="row">
-                    <div className="col-9 ">
-                      <Input
-                        placeholder="search"
-                        className={"w-25"}
-                        onChange={(event) => {
-                          if (event.target.value !== "") {
-                            setuserDetail({
-                              ...userDetail,
-                              searchTerm: event.target.value,
-                              page: 1,
-                            });
-                          } else {
-                            const { searchTerm, ...value } = userDetail;
+                      setuserDetail({ ...userDetail, page: paginate });
+                    }
+                  }}
+                />
+              </div>
 
-                            setuserDetail(value);
-
-                            setuserDetail({ ...userDetail, page: paginate });
-                          }
-                        }}
-                      />
-          
-                    </div>
-
-                    <div className=" col-3 d-flex gap-2 ">
-                      <Button
-                        buttonName="Add"
-                        color="white"
-                        className="pe-none"
-                        red="danger"
-                        Icon={
-                          <InlineIcon icon="uil:plus" width="15" height="15" />
-                        }
-                      />
-                      <Button
-                        buttonName="Invite"
-                        color="white"
-                        red="danger"
-                        className="pe-none"
-                        Icon={
-                          <InlineIcon
-                            icon="mdi:account-multiple-plus"
-                            width="15"
-                            height="15"
-                          />
-                        }
-                      />
-                    </div>
-                  </div>
-
-                  <div className="table-container table-responsive">
-                    <Table
-                      headersName={
-                        userDetail.userType === "RETAILER"
-                          ? RetailerHeaderName
-                          : DistributorHeaderName
-                      }
-                      data={
-                        selector?.data && selector?.data?.data?.items
-                          ? selector?.data?.data?.items.map((item) => ({
-                              ...item,
-
-                              joinedDate: moment(item.joinedDate).format(
-                                "YYYY-MM-DD LT"
-                              ),
-                            }))
-                          : []
-                      }
-                      isLoading={selector?.loading}
-                      handleSort={handleSort}
-                      handleClick={handleClick}
-                      Icon={
-                        <InlineIcon
-                          icon="pajamas:remove"
-                          width="15"
-                          height="15"
-                          style={{ color: "black" }}
-                        />
-                      }
+              <div className=" col-md-2 col-lg-2 p-2 d-flex gap-2 ">
+                <Button
+                  buttonName="Add"
+                  color="white"
+                  className="pe-none"
+                  red="danger"
+                  Icon={<InlineIcon icon="uil:plus" width="15" height="15" />}
+                />
+                <Button
+                  buttonName="Invite"
+                  color="white"
+                  red="danger"
+                  className="pe-none"
+                  Icon={
+                    <InlineIcon
+                      icon="mdi:account-multiple-plus"
+                      width="15"
+                      height="15"
                     />
-                  </div>
+                  }
+                />
+              </div>
+            </div>
 
-                  <div className="card border-0">
-                    <div className="d-flex justify-content-between">
-                      <div className="d-flex">
-                        <label>
-                          Showing 1 to {userDetail.size} of{" "}
-                          {selector?.data?.data?.totalCount} entries
-                        </label>
+            <div className="table-container  table-responsive">
+              <Table
+                headersName={
+                  userDetail.userType === "RETAILER"
+                    ? RetailerHeaderName
+                    : DistributorHeaderName
+                }
+                data={
+                  selector?.data && selector?.data?.data?.items
+                    ? selector?.data?.data?.items.map((item) => ({
+                        ...item,
 
-                        <select
-                          onChange={(event) =>
-                            setuserDetail({
-                              ...userDetail,
-                              size: event.target.value,
-                            })
-                          }
-                          className="form-select w-25"
-                          aria-label="Default select example"
-                        >
-                          <option value="10">10</option>
-                          <option value="20">20</option>
-                          <option value="30">30</option>
-                          <option value="40">40</option>
-                          <option value="50">50</option>
-                        </select>
-                      </div>
-                      <div className="p-2">
-                        <ReactPaginate
-                          previousLabel={"previous"}
-                          nextLabel={"next"}
-                          pageCount={page}
-                          onPageChange={handlePageClick}
-                          pageRangeDisplayed={10}
-                          containerClassName={"pagination "}
-                          pageClassName={"page-item px-0"}
-                          pageLinkClassName={"page-link"}
-                          previousClassName={"page-item px-0"}
-                          previousLinkClassName={"page-link"}
-                          nextClassName={"page-item px-0"}
-                          nextLinkClassName={"page-link"}
-                          activeClassName={"active"}
-                        />{" "}
-                      </div>
-                    </div>
-                  </div>
+                        joinedDate: moment(item.joinedDate).format(
+                          "YYYY-MM-DD LT"
+                        ),
+                      }))
+                    : []
+                }
+                isLoading={selector?.loading}
+                handleSort={handleSort}
+                handleClick={handleClick}
+                Icon={
+                  <InlineIcon
+                    icon="pajamas:remove"
+                    width="15"
+                    height="15"
+                    style={{ color: "black" }}
+                  />
+                }
+              />
+            </div>
+
+            <div className="card border-0">
+              <div className="d-flex justify-content-between">
+                <div className=" col-sm-12 d-flex keep p-2">
+                  <label>
+                    Showing 1 to {userDetail.size} of{" "}
+                    {selector?.data?.data?.totalCount} entries
+                  </label>
+
+                  <select
+                    onChange={(event) =>
+                      setuserDetail({
+                        ...userDetail,
+                        size: event.target.value,
+                      })
+                    }
+                    className="form-select w-25"
+                    aria-label="Default select example"
+                  >
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                  </select>
+                </div>
+                <div className="p-2">
+                  <ReactPaginate
+                    previousLabel={"previous"}
+                    nextLabel={"next"}
+                    pageCount={page}
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={10}
+                    containerClassName={"pagination "}
+                    pageClassName={"page-item px-0"}
+                    pageLinkClassName={"page-link"}
+                    previousClassName={"page-item px-0"}
+                    previousLinkClassName={"page-link"}
+                    nextClassName={"page-item px-0"}
+                    nextLinkClassName={"page-link"}
+                    activeClassName={"active"}
+                  />{" "}
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
       <ToastContainer />
-    
     </>
   );
 };

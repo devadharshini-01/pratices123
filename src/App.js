@@ -32,14 +32,14 @@ export const App = () => {
               }
             />
             <Route path="/Retailer" element={<Distributor />} />
-            <Route path="/userdetail" element={<Userdetail />} />
+            <Route path="/userdetail/:Id" element={<Userdetail />} />
             <Route path="/Dashboard" element={<WorkinProgress />} />
             <Route path="/Exchange" element={<WorkinProgress />} />
             <Route path="/Exchange" element={<WorkinProgress />} />
             <Route path="/ddOrder" element={<WorkinProgress />} />
             <Route path="/ssfee" element={<WorkinProgress />} />
             <Route path="/reports" element={<WorkinProgress />} />
-            <Route path="/Datapage/:userId" element={<Datapage />} />
+            <Route path="/Datapage/:Id" element={<Datapage />} />
           </Route>
         </Routes>
       </BrowserRouter>

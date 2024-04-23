@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Input from "../component/custom/Input";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { UserGetApi } from "../Redux/Action/UsersListApiAction";
 
 const validationSchema = yup.object().shape({
   userId: yup.string().required("required"),
@@ -34,22 +37,65 @@ const validationSchema = yup.object().shape({
   joinedDate: yup.string().required("required"),
 });
 
-export const Detailpage = ({ edit, setEdit, initialVal }) => {
-  const [updatedValue, setUpdatedValues] = useState(initialVal);
-
+export const Detailpage = ({ edit, setEdit }) => {
+  const dispatch = useDispatch();
+  const { Id } = useParams();
+  const datalist = useSelector((state) => state.userlist.userdataapi);
+  const [updatedValues, setUpdatedValues] = useState();
+  console.log(datalist, "dddd", updatedValues, "updated");
   const handleFormSubmit = (values) => {
     setUpdatedValues(values);
     setEdit(false);
   };
 
   const formik = useFormik({
-    initialValues: initialVal,
+    initialValues: {
+      userId: "",
+      emailId: "",
+      displayId: "",
+      status: "",
+      userType: "",
+      profileId: "",
+      companyName: "",
+      phoneNumber: "",
+      website: "",
+      primaryContactName: "",
+      address: "",
+      activationKey: "",
+      posProvider: "",
+      websiteProvider: "",
+      licenceNumber: "",
+      licenceType: "",
+      ipAddress: "",
+      inventoryManagementSystem: "",
+      additionalOrderFulfillmentSoftware: "",
+      minimumOrderThresholds: "",
+      numberOfStoreLocations: "",
+      orderCutOffTime: "",
+      monthlySalesSort: "",
+      monthlyOrders: "",
+      noOfOrders: "",
+      noOfMappedRetailers: "",
+      monthlySales: "",
+      joinedDate: "",
+    },
     validationSchema,
     onSubmit: (values) => {
       handleFormSubmit(values);
     },
   });
 
+  useEffect(() => {
+    dispatch(UserGetApi(Id));
+  }, [Id]);
+
+  useEffect(() => {
+    if (datalist?.data?.data) {
+      setUpdatedValues(datalist?.data?.data);
+      // formik.setFieldValue("userId", datalist?.data?.data?.userId);
+    }
+    formik.setFieldValue("userId", datalist?.data?.data?.userId);
+  }, [datalist, edit]);
   return (
     <form onSubmit={formik.handleSubmit}>
       <>
@@ -68,23 +114,23 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="userId"
-                    value={formik.values.userId}
+                    value={formik?.values?.userId}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.userId}</p>
+                  <p>{updatedValues?.userId}</p>
                 )}
-                <p className="text-danger">{formik.errors.userId}</p>
+                <p className="text-danger">{formik?.errors?.userId}</p>
                 <b>Status</b>
 
                 {edit ? (
                   <Input
                     name="status"
-                    value={formik.values.status}
+                    value={formik.values?.status}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.status}</p>
+                  <p>{updatedValues?.status}</p>
                 )}
                 <p className="text-danger">{formik.errors.status}</p>
                 <b>ProfileId</b>
@@ -92,11 +138,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="profileId"
-                    value={formik.values.profileId}
+                    value={formik.values?.profileId}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.profileId}</p>
+                  <p>{updatedValues?.profileId}</p>
                 )}
                 <p className="text-danger">{formik.errors.profileId}</p>
                 <b>Website</b>
@@ -104,11 +150,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="website"
-                    value={formik.values.website}
+                    value={formik.values?.website}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.website}</p>
+                  <p>{updatedValues?.website}</p>
                 )}
                 <p className="text-danger">{formik.errors.website}</p>
                 <b>ActivationKey</b>
@@ -116,11 +162,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="activationKey"
-                    value={formik.values.activationKey}
+                    value={formik.values?.activationKey}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.activationKey}</p>
+                  <p>{updatedValues?.activationKey}</p>
                 )}
                 <p className="text-danger">{formik.errors.activationKey}</p>
                 <b>LicenceManagementSystem</b>
@@ -128,11 +174,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="licenceNumber"
-                    value={formik.values.licenceNumber}
+                    value={formik.values?.licenceNumber}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.licenceNumber}</p>
+                  <p>{updatedValues?.licenceNumber}</p>
                 )}
                 <p className="text-danger">{formik.errors.licenceNumber}</p>
                 <b>InventoryManagementSystem</b>
@@ -140,11 +186,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="inventoryManagementSystem"
-                    value={formik.values.inventoryManagementSystem}
+                    value={formik.values?.inventoryManagementSystem}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.inventoryManagementSystem}</p>
+                  <p>{updatedValues?.inventoryManagementSystem}</p>
                 )}
                 <p className="text-danger">
                   {formik.errors.inventoryManagementSystem}
@@ -154,11 +200,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="monthlyOrders"
-                    value={formik.values.monthlyOrders}
+                    value={formik.values?.monthlyOrders}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.monthlyOrders}</p>
+                  <p>{updatedValues?.monthlyOrders}</p>
                 )}
                 <p className="text-danger">{formik.errors.monthlyOrders}</p>
                 <b>Nooforders</b>
@@ -166,11 +212,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="noofOrders"
-                    value={formik.values.noOfOrders}
+                    value={formik.values?.noOfOrders}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.noOfOrders}</p>
+                  <p>{updatedValues?.noOfOrders}</p>
                 )}
                 <p className="text-danger">{formik.errors.noOfOrders}</p>
                 <b>Ordercutofftime</b>
@@ -178,11 +224,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="orderCutOffTime"
-                    value={formik.values.orderCutOffTime}
+                    value={formik.values?.orderCutOffTime}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.orderCutOffTime}</p>
+                  <p>{updatedValues?.orderCutOffTime}</p>
                 )}
                 <p className="text-danger">{formik.errors.orderCutOffTime}</p>
                 <b>MonthlySalessort</b>
@@ -190,11 +236,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="monthlyOrders"
-                    value={formik.values.monthlyOrders}
+                    value={formik.values?.monthlyOrders}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.monthlySalesSort}</p>
+                  <p>{updatedValues?.monthlySalesSort}</p>
                 )}
                 <p className="text-danger">{formik.errors.monthlySalesSort}</p>
               </div>
@@ -204,11 +250,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="emailId"
-                    value={formik.values.emailId}
+                    value={formik.values?.emailId}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.emailId}</p>
+                  <p>{updatedValues?.emailId}</p>
                 )}
                 <p className="text-danger">{formik.errors.emailId}</p>
                 <b>Usertype</b>
@@ -216,11 +262,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="userType"
-                    value={formik.values.userType}
+                    value={formik.values?.userType}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.userType}</p>
+                  <p>{updatedValues?.userType}</p>
                 )}
                 <p className="text-danger">{formik.errors.userType}</p>
                 <b>Companyname</b>
@@ -228,11 +274,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="companyName"
-                    value={formik.values.companyName}
+                    value={formik.values?.companyName}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.companyName}</p>
+                  <p>{updatedValues?.companyName}</p>
                 )}
                 <p className="text-danger">{formik.errors.companyName}</p>
                 <b>Primarycontactname</b>
@@ -240,11 +286,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="primaryContactName"
-                    value={formik.values.primaryContactName}
+                    value={formik.values?.primaryContactName}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.primaryContactName}</p>
+                  <p>{updatedValues?.primaryContactName}</p>
                 )}
                 <p className="text-danger">
                   {formik.errors.primaryContactName}
@@ -254,11 +300,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="posProvider"
-                    value={formik.values.posProvider}
+                    value={formik.values?.posProvider}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.posProvider}</p>
+                  <p>{updatedValues?.posProvider}</p>
                 )}
                 <p className="text-danger">{formik.errors.posProvider}</p>
                 <b>Licencetype</b>
@@ -266,11 +312,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="licenceType"
-                    value={formik.values.licenceType}
+                    value={formik.values?.licenceType}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.licenceType}</p>
+                  <p>{updatedValues?.licenceType}</p>
                 )}
                 <p className="text-danger">{formik.errors.licenceType}</p>
                 <b>AdditionalOrderFulfillmentSoftware</b>
@@ -278,11 +324,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="additionalOrderFulfillmentSoftware"
-                    value={formik.values.additionalOrderFulfillmentSoftware}
+                    value={formik.values?.additionalOrderFulfillmentSoftware}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.additionalOrderFulfillmentSoftware}</p>
+                  <p>{updatedValues?.additionalOrderFulfillmentSoftware}</p>
                 )}
                 <p className="text-danger">
                   {formik.errors.additionalOrderFulfillmentSoftware}
@@ -292,11 +338,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="minimumOrderThresholds"
-                    value={formik.values.minimumOrderThresholds}
+                    value={formik.values?.minimumOrderThresholds}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.minimumOrderThresholds}</p>
+                  <p>{updatedValues?.minimumOrderThresholds}</p>
                 )}
                 <p className="text-danger">
                   {formik.errors.minimumOrderThresholds}
@@ -306,11 +352,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="numberOfStoreLocations"
-                    value={formik.values.numberOfStoreLocations}
+                    value={formik.values?.numberOfStoreLocations}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.numberOfStoreLocations}</p>
+                  <p>{updatedValues?.numberOfStoreLocations}</p>
                 )}
                 <p className="text-danger">
                   {formik.errors.numberOfStoreLocations}
@@ -322,11 +368,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="displayId"
-                    value={formik.values.displayId}
+                    value={formik.values?.displayId}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.displayId}</p>
+                  <p>{updatedValues?.displayId}</p>
                 )}
                 <p className="text-danger">{formik.errors.displayId}</p>
                 <b>Joineddate</b>
@@ -334,11 +380,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="joinedDate"
-                    value={formik.values.joinedDate}
+                    value={formik.values?.joinedDate}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.joinedDate}</p>
+                  <p>{updatedValues?.joinedDate}</p>
                 )}
                 <p className="text-danger">{formik.errors.joinedDate}</p>
                 <b>Phonenumber</b>
@@ -346,11 +392,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="phoneNumber"
-                    value={formik.values.phoneNumber}
+                    value={formik.values?.phoneNumber}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.phoneNumber}</p>
+                  <p>{updatedValues?.phoneNumber}</p>
                 )}
                 <p className="text-danger">{formik.errors.phoneNumber}</p>
                 <b>Address</b>
@@ -358,11 +404,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="joinedDate"
-                    value={formik.values.address}
+                    value={formik.values?.address}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.address}</p>
+                  <p>{updatedValues?.address}</p>
                 )}
                 <p className="text-danger">{formik.errors.address}</p>
                 <b>websiteProvider</b>
@@ -370,11 +416,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="websiteProvider"
-                    value={formik.values.websiteProvider}
+                    value={formik.values?.websiteProvider}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.websiteProvider}</p>
+                  <p>{updatedValues?.websiteProvider}</p>
                 )}
                 <p className="text-danger">{formik.errors.websiteProvider}</p>
                 <b>IpAddress</b>
@@ -382,11 +428,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="ipAddress"
-                    value={formik.values.ipAddress}
+                    value={formik.values?.ipAddress}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.ipAddress}</p>
+                  <p>{updatedValues?.ipAddress}</p>
                 )}
                 <p className="text-danger">{formik.errors.ipAddress}</p>
                 <b>NoOfMappedRetailers</b>
@@ -394,11 +440,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="noOfMappedRetailers"
-                    value={formik.values.noOfMappedRetailers}
+                    value={formik.values?.noOfMappedRetailers}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.noOfMappedRetailers}</p>
+                  <p>{updatedValues?.noOfMappedRetailers}</p>
                 )}
                 <p className="text-danger">
                   {formik.errors.noOfMappedRetailers}
@@ -408,11 +454,11 @@ export const Detailpage = ({ edit, setEdit, initialVal }) => {
                 {edit ? (
                   <Input
                     name="monthlySales"
-                    value={formik.values.monthlySales}
+                    value={formik.values?.monthlySales}
                     onChange={formik.handleChange}
                   />
                 ) : (
-                  <p>{updatedValue?.monthlySales}</p>
+                  <p>{updatedValues?.monthlySales}</p>
                 )}
                 <p className="text-danger">{formik.errors.monthlySales}</p>
               </div>

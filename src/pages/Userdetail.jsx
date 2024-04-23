@@ -1,7 +1,6 @@
-import Sidebar from "../component/custom/Sidebar";
-import Header from "../component/custom/Header";
+
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import Button from "../component/custom/Button";
 import { InlineIcon } from "@iconify/react";
 import { Detailpage } from "./Detailpage";
@@ -9,27 +8,25 @@ import { Order } from "./Order";
 import { Platformpage } from "./Platformpage";
 import { Retailerspage } from "./Retailerspage";
 import { Settings } from "./Settings";
-import Layout from "../component/custom/Layout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { UserGetApi } from "../Redux/Action/UsersListApiAction";
 
 const Userdetail = () => {
 
-  const location = useLocation();
-  const initialVal = location?.state?.DD;
+  // const location = useLocation();
+  // const initialVal = location?.state?.DD;
   const returnPath = localStorage.getItem("ReturnPath");
+
 
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
-  const [openTab, setOpenTab] = useState("Detailpage");
-  // const returnPathWithoutSlash = returnPath
-  //   ? returnPath.replace(/\//g, "")
-  //   : "";
-  console.log(openTab, "tab");
+  const [openTab, setOpenTab] = useState("Details");
+ 
   const tabs = [
     {
       name: "Details",
       content: (
-        <Detailpage initialVal={initialVal} edit={edit} setEdit={setEdit} />
+        <Detailpage  edit={edit} setEdit={setEdit} />
       ),
     },
     { name: "Orders", content: <Order /> },
@@ -41,18 +38,14 @@ const Userdetail = () => {
     { name: "Settings", content: <Settings /> },
   ];
 
-  useEffect(()=>{
-
-  },[])
   return (
     <>
-      <div className="overflow-hidden">
+  
+      <div className="overflow-hidden  ">
         <div className="vh-100">
           <div className="row">
-         
-            <div className=" col-sm-12 col-md-10 col-lg-10">
+          
               <div className="d-flex vh-100 flex-column overflow-auto">
-                {/* <Header title={returnPathWithoutSlash} /> */}
                 <div className="flex-grow-1 overflow-x-hidden pb-80px">
                   <div className="row">
                     <div className="col-9">
@@ -82,7 +75,7 @@ const Userdetail = () => {
                       )}
                     </div>
                   </div>
-                  <div className="card mt-2 border-0 ">
+                  <div className="d-none  d-sm-none d-md-block d-lg-block card mt-2 border-0 ">
                     <ul
                       className="nav nav-pills mb-3 d-flex justify-content-around  "
                       id="pills-tab"
@@ -116,7 +109,7 @@ const Userdetail = () => {
             </div>
           </div>
         </div>
-      </div>
+  
     </>
   );
 };
