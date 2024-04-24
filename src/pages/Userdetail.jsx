@@ -41,7 +41,7 @@ const Userdetail = () => {
   return (
     <>
   
-      <div className="overflow-hidden  ">
+      <div className="">
         <div className="vh-100">
           <div className="row">
           
@@ -55,6 +55,7 @@ const Userdetail = () => {
                         color="white"
                         onClick={() => navigate(returnPath)}
                       />
+                      <p>{openTab}</p>
                     </div>
 
                     <div className="col-3">
@@ -77,7 +78,7 @@ const Userdetail = () => {
                   </div>
                   <div className="d-none  d-sm-none d-md-block d-lg-block card mt-2 border-0 ">
                     <ul
-                      className="nav nav-pills mb-3 d-flex justify-content-around  "
+                      className="nav nav-pills mb-3 d-flex justify-content-around p-3 "
                       id="pills-tab"
                       role="tablist"
                     >

@@ -168,7 +168,7 @@ const Distributor = () => {
                         size: event.target.value,
                       })
                     }
-                    className="form-select w-25"
+                    className="form-select  w-25"
                     aria-label="Default select example"
                   >
                     <option value="10">10</option>
@@ -178,7 +178,7 @@ const Distributor = () => {
                     <option value="50">50</option>
                   </select>
                 </div>
-                <div className="p-2">
+                <div className="p-2 ">
                   <ReactPaginate
                     previousLabel={"previous"}
                     nextLabel={"next"}

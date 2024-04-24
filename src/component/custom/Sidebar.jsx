@@ -6,9 +6,8 @@ import {
   AdminData,
 } from "../../Constant/index";
 
-const Sidebar = () => {
+const Sidebar = ({activeSidebar,setActiveSidebar}) => {
   const [currentSidebarData, setCurrentSidebarData] = useState([]);
-  const [activeSidebar, setActiveSidebar] = useState("/Dashboard");
   const userType = localStorage.getItem("userType");
   useEffect(() => {
     if (userType === "Distributor") {

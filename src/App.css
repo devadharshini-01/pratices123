@@ -42,3 +42,7 @@ text-align: center;
 {
   font-size:15px;
 }
+.paginate
+{
+  width:10px !important;
+}
