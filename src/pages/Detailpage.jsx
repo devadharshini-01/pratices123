@@ -39,15 +39,15 @@ export const Detailpage = ({ edit, setEdit }) => {
   const dispatch = useDispatch();
   const { Id } = useParams();
   const datalist = useSelector((state) => state.userlist.userdataapi);
-
+  console.log(datalist, "datalist");
   const [updatedValues, setUpdatedValues] = useState();
-  console.log(datalist, "dddd", updatedValues, "updated");
+  console.log(updatedValues, "updated");
   const handleFormSubmit = (values) => {
-    console.log("submit clicked",values);
     setUpdatedValues(values);
     setEdit(false);
   };
 
+  console.log(updatedValues, "updatedValues");
   const formik = useFormik({
     initialValues: {
       userId: "",
@@ -82,6 +82,7 @@ export const Detailpage = ({ edit, setEdit }) => {
     validationSchema,
     onSubmit: (values) => {
       handleFormSubmit(values);
+      console.log(values, "values");
     },
   });
   console.log(formik, "formik");
@@ -92,10 +93,10 @@ export const Detailpage = ({ edit, setEdit }) => {
   useEffect(() => {
     if (datalist?.data?.data) {
       setUpdatedValues(datalist?.data?.data);
-    
     }
     formik.setValues(datalist?.data?.data);
-  }, [datalist, edit]);
+  }, [datalist]);
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <>
@@ -106,27 +107,25 @@ export const Detailpage = ({ edit, setEdit }) => {
           aria-labelledby="pills-home-tab"
           tabindex="0"
         >
-          <div className="card border-0 p-3 mt-5">
+          <div className="card border-0 p-3 mt-2">
             <div className="row">
               {updatedValues &&
                 Object.keys(updatedValues).map((item) => {
-                  console.log(item,"item");
                   return (
                     <div className="col-4">
                       <b>{item}</b>
                       {edit ? (
                         <>
-                        <Input
-                          name={item}
-                          value={formik.values[item]}
-                          onChange={formik.handleChange}
-                        />
-                        <p className="text-danger">{formik.errors[item]}</p>
+                          <Input
+                            name={item}
+                            value={formik.values[item]}
+                            onChange={formik.handleChange}
+                          />
+                          <p className="text-danger">{formik.errors[item]}</p>
                         </>
                       ) : (
-                        <p>{updatedValues[item]}</p>
+                        <p>{updatedValues[item]} </p>
                       )}
-                     
                     </div>
                   );
                 })}

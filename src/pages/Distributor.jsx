@@ -9,7 +9,7 @@ import Table from "../component/custom/Table";
 import { UsersListApiAction } from "../Redux/Action/UsersListApiAction";
 import "../App.css";
 import Button from "../component/custom/Button";
-import { InlineIcon } from "@iconify/react";
+import { Icon, InlineIcon } from "@iconify/react";
 import ReactPaginate from "react-paginate";
 import moment from "moment";
 import Input from "../component/custom/Input";
@@ -71,7 +71,7 @@ const Distributor = () => {
 
   return (
     <>
-    
+ 
         <div className="d-flex vh-100 flex-column overflow-auto">
           <div className="flex-grow-1 overflow-x-hidden pb-80px">
             <div className="row d-flex justify-content-between">
@@ -154,8 +154,8 @@ const Distributor = () => {
             </div>
 
             <div className="card border-0">
-              <div className="d-flex justify-content-between">
-                <div className=" col-sm-12 d-flex keep p-2">
+              <div className=" justify-content-between">
+                <div className=" col-sm-12 d-flex  p-2">
                   <label>
                     Showing 1 to {userDetail.size} of{" "}
                     {selector?.data?.data?.totalCount} entries
@@ -180,11 +180,12 @@ const Distributor = () => {
                 </div>
                 <div className="p-2 ">
                   <ReactPaginate
-                    previousLabel={"previous"}
-                    nextLabel={"next"}
+                    previousLabel={<><Icon icon="radix-icons:chevron-left" width="10" height="10"  style={{color: "black"}} /> </>}
+                    nextLabel={<><Icon icon="radix-icons:chevron-right" width="10" height="10"  style={{color: "black"}} /></>}
                     pageCount={page}
                     onPageChange={handlePageClick}
-                    pageRangeDisplayed={10}
+                    pageRangeDisplayed={3}
+                    
                     containerClassName={"pagination "}
                     pageClassName={"page-item px-0"}
                     pageLinkClassName={"page-link"}
@@ -193,7 +194,10 @@ const Distributor = () => {
                     nextClassName={"page-item px-0"}
                     nextLinkClassName={"page-link"}
                     activeClassName={"active"}
-                  />{" "}
+                    breakLabel="..."
+
+                  />
+
                 </div>
               </div>
             </div>

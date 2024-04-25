@@ -46,3 +46,7 @@ text-align: center;
 {
   width:10px !important;
 }
+.overflow
+{
+  overflow: unset !important;
+}

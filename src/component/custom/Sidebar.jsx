@@ -5,7 +5,7 @@ import {
   RetailerData,
   AdminData,
 } from "../../Constant/index";
-
+import logo from "../../images/logo.webp"
 const Sidebar = ({activeSidebar,setActiveSidebar}) => {
   const [currentSidebarData, setCurrentSidebarData] = useState([]);
   const userType = localStorage.getItem("userType");
@@ -32,8 +32,8 @@ if(storeactive){
 
   return (
     <>
-      <div className="list-group  ">
-        <b className="red-color p-4">Vinobridge</b>
+      <div className="list-group mt-4 ">
+   <img className="w-75  " src={logo}></img>
         {Array.isArray(currentSidebarData) &&
           currentSidebarData?.map((value) => {
             return (
