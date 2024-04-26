@@ -7,7 +7,7 @@ const Header = ({title}) => {
  
   return (
     <>
-      <nav class="navbar bg-white mt-4 rounded-3">
+      <nav class="navbar bg-white mt-4 rounded-3 position-sticky">
         <div class="container-fluid">
           <a class="navbar-brand red-color " href="#">
             <b>{title}</b>

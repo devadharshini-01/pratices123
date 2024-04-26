@@ -79,7 +79,10 @@ export const Detailpage = ({ edit, setEdit }) => {
       monthlySales: "",
       joinedDate: "",
     },
+    validateOnBlur:false,
+    validateOnChange:false,
     validationSchema,
+   
     onSubmit: (values) => {
       handleFormSubmit(values);
       console.log(values, "values");

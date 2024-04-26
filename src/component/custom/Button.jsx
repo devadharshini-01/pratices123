@@ -6,7 +6,7 @@ const Button = ({ onClick, type, buttonName, Icon, color, red,className }) => {
         type={type}
         className={`btn mt-2 bg-${color}  text-${red} ${className}`}
       >
-        {buttonName} {Icon}
+        <b>{buttonName}</b> {Icon}
       </button>
     </>
   );

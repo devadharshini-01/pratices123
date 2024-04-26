@@ -72,8 +72,8 @@ const Distributor = () => {
   return (
     <>
  
-        <div className="d-flex vh-100 flex-column overflow-auto">
-          <div className="flex-grow-1 overflow-x-hidden pb-80px">
+        <div className="flex-grow-1 overflow-auto pb-80px">
+      
             <div className="row d-flex justify-content-between">
               <div className="col-sm-12 col-md-3 col-lg-3 ">
                 <Input
@@ -97,7 +97,7 @@ const Distributor = () => {
                 />
               </div>
 
-              <div className=" col-md-2 col-lg-2 p-2 d-flex gap-2 ">
+              <div className=" col-md-3 col-lg-3 p-2 d-flex gap-2 ">
                 <Button
                   buttonName="Add"
                   color="white"
@@ -180,8 +180,8 @@ const Distributor = () => {
                 </div>
                 <div className="p-2 ">
                   <ReactPaginate
-                    previousLabel={<><Icon icon="radix-icons:chevron-left" width="10" height="10"  style={{color: "black"}} /> </>}
-                    nextLabel={<><Icon icon="radix-icons:chevron-right" width="10" height="10"  style={{color: "black"}} /></>}
+                    previousLabel={<><Icon className="red-color" icon="radix-icons:chevron-left" width="10" height="10" /> </>}
+                    nextLabel={<><Icon className="red-color" icon="radix-icons:chevron-right" width="10" height="10"/></>}
                     pageCount={page}
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={3}
@@ -202,7 +202,7 @@ const Distributor = () => {
               </div>
             </div>
           </div>
-        </div>
+     
 
       <ToastContainer />
     </>

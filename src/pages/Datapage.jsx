@@ -15,9 +15,9 @@ const Datapage = () => {
 
   return (
     <>
-      <div className="overflow-auto">
-        <div className="vh-100">
-          <div className="row">
+      <div className=" overflow-hidden flex-grow-1 d-flex flex-column">
+ 
+          <div className="row  flex-grow-1">
       
               <div className="card border-0 p-3 mt-5">
                 <div className="row">
@@ -27,7 +27,7 @@ const Datapage = () => {
                       return (
                         <div className="col-4">
                           <p>
-                            {item}:<br></br>
+                           <b className="text-block">{item}</b> <br></br>
                             {initialVal[item]}
                           </p>
                         </div>
@@ -37,7 +37,7 @@ const Datapage = () => {
               </div>
             </div>
           </div>
-        </div>
+      
    
     </>
   );

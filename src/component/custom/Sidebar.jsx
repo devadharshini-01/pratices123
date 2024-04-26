@@ -32,7 +32,7 @@ if(storeactive){
 
   return (
     <>
-      <div className="list-group mt-4 ">
+      <div className="list-group mt-4  ">
    <img className="w-75  " src={logo}></img>
         {Array.isArray(currentSidebarData) &&
           currentSidebarData?.map((value) => {
